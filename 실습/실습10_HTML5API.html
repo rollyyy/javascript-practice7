@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>실습10_HTML5API</title>
+    <style>
+        .wrapper {
+            display: flex;
+        }
+
+        .preview{
+            border:1px solid lightgray;
+            width:500px;
+            min-height:300px; 
+            margin : 20px;
+        }
+
+       .preview img {
+           width : 100%;
+       }
+
+        .files {
+            display: none;
+        }
+
+        .lists{
+			border: 1px solid black; 
+			width: 1280px; 
+			min-height: 215px;
+			padding: 5px; 
+			margin: 10px; 
+		}
+	
+		.items{
+			width: 200px; 
+			height: 200px; 
+		} 
+    </style>
+</head>
+
+<body>
+    <h1>HTML5 API</h1>
+
+    <h3>문제 1</h3>
+    <p>
+        아래 div 영역을 클릭 시 파일 첨부창이 뜨고 이미지 파일 첨부 시
+        해당 파일을 div에 프리뷰로 표현하는 코드를 작성한다.
+    </p>
+    <div class="wrapper">
+        <div id="preview1" class="preview"></div>
+        <div id="preview2" class="preview"></div>
+        <div id="preview3" class="preview"></div>
+    </div>
+
+
+    <div class="files">
+        <input type="file" id="imgfile1" name="imgfile1" class="imgUpload">
+        <input type="file" id="imgfile2" name="imgfile2" class="imgUpload">
+        <input type="file" id="imgfile3" name="imgfile3" class="imgUpload">
+    </div>
+
+
+    <h2>문제 2</h2>
+    <p>
+        블루 체육관과 노랑 체육관에 포켓몬들이 있다. 각 체육관을 자유롭게 이동할 수 있도록 drag and drop 기능을 구현한다.
+        div 영역에 drop 될 경우 가장 마지막에 추가하고 img 영역에 drop 될 경우 해당 이미지 다음 차례로 추가한다.
+    </p>
+    <h3>블루체육관</h3>
+    <div id='blue' class='lists'>
+        <img id='item1' class='items' src='../resources/images/001.png'>
+        <img id='item2' class='items' src='../resources/images/004.png'>
+        <img id='item3' class='items' src='../resources/images/007.png'>
+        <img id='item4' class='items' src='../resources/images/008.png'>
+        <img id='item5' class='items' src='../resources/images/025.png'>
+    </div>
+    <h3>노랑체육관</h3>
+    <div id='yellow' class='lists'>
+        <img id='item6' class='items' src='../resources/images/026.png'>
+        <img id='item7' class='items' src='../resources/images/035.png'>
+        <img id='item8' class='items' src='../resources/images/037.png'>
+        <img id='item9' class='items' src='../resources/images/039.png'>
+        <img id='item10' class='items' src='../resources/images/043.png'>
+    </div>
+
+</body>
+
+</html>
