@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html lang="ko">
-
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>실습10_HTML5API</title>
+    <title>실습10_HTML5API_답</title>
     <style>
         .wrapper {
             display: flex;
@@ -40,7 +39,6 @@
 		} 
     </style>
 </head>
-
 <body>
     <h1>HTML5 API</h1>
 
@@ -54,37 +52,76 @@
         <div id="preview2" class="preview"></div>
         <div id="preview3" class="preview"></div>
     </div>
-
+    
 
     <div class="files">
         <input type="file" id="imgfile1" name="imgfile1" class="imgUpload">
         <input type="file" id="imgfile2" name="imgfile2" class="imgUpload">
         <input type="file" id="imgfile3" name="imgfile3" class="imgUpload">
     </div>
-	//풀어봤는데 답을 잘 모르겠다. 내일 다시 한번 풀어봐야 할 것 같다.
 
-    <h2>문제 2</h2>
-    <p>
-        블루 체육관과 노랑 체육관에 포켓몬들이 있다. 각 체육관을 자유롭게 이동할 수 있도록 drag and drop 기능을 구현한다.
-        div 영역에 drop 될 경우 가장 마지막에 추가하고 img 영역에 drop 될 경우 해당 이미지 다음 차례로 추가한다.
-    </p>
-    <h3>블루체육관</h3>
-    <div id='blue' class='lists'>
-        <img id='item1' class='items' src='../resources/images/001.png'>
-        <img id='item2' class='items' src='../resources/images/004.png'>
-        <img id='item3' class='items' src='../resources/images/007.png'>
-        <img id='item4' class='items' src='../resources/images/008.png'>
-        <img id='item5' class='items' src='../resources/images/025.png'>
-    </div>
-    <h3>노랑체육관</h3>
-    <div id='yellow' class='lists'>
-        <img id='item6' class='items' src='../resources/images/026.png'>
-        <img id='item7' class='items' src='../resources/images/035.png'>
-        <img id='item8' class='items' src='../resources/images/037.png'>
-        <img id='item9' class='items' src='../resources/images/039.png'>
-        <img id='item10' class='items' src='../resources/images/043.png'>
-    </div>
+    <script>
+        document.querySelectorAll(".preview").forEach(item => item.addEventListener('click', fileUpload));
+        document.querySelectorAll(".imgUpload").forEach(item => item.addEventListener('change', preview));
+       
+        function fileUpload(){
+            let index = Array.from(document.querySelectorAll(".preview")).indexOf(this); 
+            document.querySelectorAll(".imgUpload")[index].click();
+        }
 
+        function preview(){
+             if (this.files && this.files[0]) {
+                let index = Array.from(document.querySelectorAll(".imgUpload")).indexOf(this); 
+                let reader = new FileReader();
+                reader.readAsDataURL(this.files[0]);
+                reader.onload = function () {
+                    document.querySelectorAll(".preview")[index].innerHTML = "<img src='" + reader.result + "'>";
+                }
+            }
+        }
+    </script>
+
+<h2>문제 2</h2>
+<p>
+    블루 체육관과 노랑 체육관에 포켓몬들이 있다. 각 체육관을 자유롭게 이동할 수 있도록 drag and drop 기능을 구현한다.
+    div 영역에 drop 될 경우 가장 마지막에 추가하고 img 영역에 drop 될 경우 해당 이미지 다음 차례로 추가한다.
+</p>
+<h3>블루체육관</h3>
+<div id='blue' class='lists'>
+    <img id='item1' class='items' src='../resources/images/001.png'>
+    <img id='item2' class='items' src='../resources/images/004.png'>
+    <img id='item3' class='items' src='../resources/images/007.png'>
+    <img id='item4' class='items' src='../resources/images/008.png'>
+    <img id='item5' class='items' src='../resources/images/025.png'>
+</div>
+<h3>노랑체육관</h3>
+<div id='yellow' class='lists'>
+    <img id='item6' class='items' src='../resources/images/026.png'>
+    <img id='item7' class='items' src='../resources/images/035.png'>
+    <img id='item8' class='items' src='../resources/images/037.png'>
+    <img id='item9' class='items' src='../resources/images/039.png'>
+    <img id='item10' class='items' src='../resources/images/043.png'>
+</div>
+<script>
+    let srcId; 
+
+    // 1. 시작점에서 드래그가 시작 되는 순간 해당 타겟의 아이디를 저장함
+    document.querySelectorAll('.lists').forEach(item => item.addEventListener('dragstart', () => srcId = event.target.id));
+
+    // 2. HTML 요소들의 기본 값은 드롭을 받아 들이지 않게 되어 있다
+    // 따라서 드롭이 가능하도록 설정하려면 이벤트의 preventDefault() 함수로 기본 값을 취소
+    // 객체를 놓았을 때 drop 대신 leave가 뜨므로 drop을 뜨게 하기 위한 장치
+    document.querySelectorAll('.lists').forEach(item => item.addEventListener('dragover', () => event.preventDefault()));
+
+    // 3. 도착점에서 드롭이 발생했을 때
+    document.querySelectorAll('.lists').forEach(item => item.addEventListener('drop', () => {
+        let target = event.target;
+        if(target.className == 'lists')
+            target.append(document.getElementById(srcId));
+        else
+            target.after(document.getElementById(srcId));
+    }));
+</script>
 </body>
-
 </html>
+
